@@ -1,0 +1,37 @@
+HOMEPAGE!!!!!!!
+<br><br><br>
+<% if current_user %>
+<% @questions.each do |question| %>
+  <div class= "container text-center">
+    <%= question.description %>
+    <div class= "row">
+      <% question.options.order(:created_at).each do |option| %>
+        <div class="col-md-6">
+          <figure>
+            <%= link_to(question_option_path(question, option), :method => :patch) do %>
+              <%= image_tag option.image_url, width: "250", height: "250" %>
+              <em><figcaption><%= option.name %></figcaption></em>
+            <% end %>
+          </figure>
+        </div>
+      <% end %>
+
+
+    </div>
+  </div>
+  <div class="row">
+    <h1> <%= question.calculate_percentage[0] %>%
+    <span class="percentage"> <%= question.calculate_percentage[1] %>%</span> </h1>
+  </div>
+    <div class="progress">
+          <div class="progress-bar progress-bar-success" style="width:<%= question.calculate_percentage[0] %>%"></div>
+          <div class="progress-bar progress-bar-info" style="width:<%= question.calculate_percentage[1] %>%" ></div>
+        </div>
+      </div>
+<% end %>
+<footer class="footer">
+  <div class="container">
+<%= link_to "New Question", new_question_path, id: "new_question_link", class: "btn btn-info", remote: true %>
+</div>
+</footer>
+<% end %>

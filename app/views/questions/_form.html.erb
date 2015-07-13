@@ -1,0 +1,7 @@
+<%= simple_form_for @question do |f|%>
+  <%= f.text_field :description, placeholder: "Question" %>
+    <%= f.simple_fields_for :options do |option| %>
+    <%= render 'questions/option_fields', :f => option %>
+    <% end %>
+  <%= f.submit %>
+<% end %>
