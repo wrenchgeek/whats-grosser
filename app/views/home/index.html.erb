@@ -8,26 +8,20 @@ HOMEPAGE!!!!!!!
       <% question.options.order(:created_at).each do |option| %>
         <div class="col-md-6">
           <figure>
-            <%= link_to(question_option_path(question, option), :method => :patch) do %>
+            <%= link_to(question_option_path(question, option), :method => :patch, remote: true) do %>
               <%= image_tag option.image_url, width: "250", height: "250" %>
               <em><figcaption><%= option.name %></figcaption></em>
             <% end %>
           </figure>
         </div>
       <% end %>
-
-
     </div>
   </div>
-  <div class="row">
-    <h1> <%= question.calculate_percentage[0] %>%
-    <span class="percentage"> <%= question.calculate_percentage[1] %>%</span> </h1>
+  <div id="percentage_calculate_<%= question.id %>" class="row" >
+
   </div>
-    <div class="progress">
-          <div class="progress-bar progress-bar-success" style="width:<%= question.calculate_percentage[0] %>%"></div>
-          <div class="progress-bar progress-bar-info" style="width:<%= question.calculate_percentage[1] %>%" ></div>
-        </div>
-      </div>
+
+
 <% end %>
 <footer class="footer">
   <div class="container">

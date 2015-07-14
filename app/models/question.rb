@@ -7,7 +7,7 @@ class Question < ActiveRecord::Base
   def calculate_percentage
     option1 = self.options[0].votes.to_f
     option2 = self.options[1].votes.to_f
-    if option1 != 0 && option2 != 0
+    if option1 + option2 != 0
       percent1 = (option1/(option1 + option2)*100).floor
       percent2 = (option2/(option1 + option2)*100).floor
     else
