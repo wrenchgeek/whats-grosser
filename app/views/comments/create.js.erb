@@ -1,0 +1,6 @@
+$('#comment_form_<%= @question.id %>').hide().after($('#comment_container_<%= @question.id %>').prepend('\
+<div class="well">\
+  <%= User.find(@comment.user_id).email %>\
+  <%= @comment.content %>\
+</div> '));
+$("comment_button_<%= @question.id %>").append('#new_question_comment_link_<%= @question.id %>').after($('#new_question_comment_link_<%= @question.id %>').show());

@@ -3,10 +3,13 @@ HOMEPAGE!!!!!!!
 <% if current_user %>
 <% @questions.each do |question| %>
   <div class= "container text-center">
-    <%= question.description %>
+    <h3><span class = "question-text"> <%= question.description %> </span></h3>
+  <br>
+  <br>
+  <br>
     <div class= "row">
       <% question.options.order(:created_at).each do |option| %>
-        <div class="col-md-6">
+        <div class="col-md-4">
           <figure>
             <%= link_to(question_option_path(question, option), :method => :patch, remote: true) do %>
               <%= image_tag option.image_url, width: "250", height: "250" %>
@@ -15,17 +18,28 @@ HOMEPAGE!!!!!!!
           </figure>
         </div>
       <% end %>
+    <div class="col-md-4" id="comment_container_<%= question.id %>" style="overflow:scroll; height:225px;">
+      <% question.comments.each do |comment| %>
+        <div class="well">
+          <%= User.find(comment.user_id).email %>
+          <%= comment.content %>
+        </div>
+      <% end %>
+    </div>
+    <div id="comment_button_<%= question.id %>">
+      <%= link_to "New Comment", new_question_comment_path(question), id: "new_question_comment_link_" + question.id.to_s, class: "btn btn-warning", remote: true %>
+    </div>
     </div>
   </div>
-  <div id="percentage_calculate_<%= question.id %>" class="row" >
+<div id="percentage_calculate_<%= question.id %>" class="row" >
 
-  </div>
+</div>
 
 
 <% end %>
 <footer class="footer">
   <div class="container">
-<%= link_to "New Question", new_question_path, id: "new_question_link", class: "btn btn-info", remote: true %>
-</div>
+    <%= link_to "New Question", new_question_path, id: "new_question_link", class: "btn btn-info", remote: true %>
+  </div>
 </footer>
 <% end %>

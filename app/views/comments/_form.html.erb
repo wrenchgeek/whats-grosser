@@ -1,0 +1,6 @@
+<div id="comment_form_<%= @question.id %>">
+<%= simple_form_for [@question, @comment], remote: true do |f| %>
+  <%= f.text_field :content, placeholder: "Comment" %>
+  <span id="create_comment_link_<%= @question.id %>"><%= f.submit %></span>
+<% end %>
+</div>
